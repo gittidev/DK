@@ -167,7 +167,11 @@ const NaverMap = () => {
     });
   }, [locations]);
 
-  return <div id="map" ref={mapRef} className={styles.map} />;
+  return (
+    <>
+      <div id="map" ref={mapRef} className={styles.map} />
+    </>
+  );
 };
 
 export default NaverMap;
