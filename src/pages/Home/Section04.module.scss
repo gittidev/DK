@@ -1,0 +1,38 @@
+@use "../../styles/variables" as v;
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 4rem 2rem;
+  background-color: v.$bg-white;
+  color: v.$primary-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: v.$primary-color;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  text-align: center;
+  color: v.$secondary-color;
+  line-height: 1.6;
+  max-width: 600px;
+
+  strong {
+    color: v.$primary-color;
+  }
+
+  span {
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
+}

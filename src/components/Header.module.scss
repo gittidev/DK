@@ -1,0 +1,51 @@
+@use "../styles/mixins" as m;
+@use "../styles/variables" as v;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .a {
+    padding: 10px 15px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-size: 24px;
+    font-weight: bold;
+
+    img {
+      padding-right: 10px;
+    }
+  }
+
+  .nav {
+    display: flex;
+    gap: 20px;
+
+    a {
+      color: v.$text-color;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.2s;
+
+      &:hover {
+        color: v.$primary-color;
+      }
+    }
+  }
+
+  @include m.respond(phone) {
+    flex-direction: column;
+    .nav {
+      margin-top: 10px;
+    }
+  }
+}

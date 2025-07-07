@@ -1,0 +1,168 @@
+@use "../styles/variables" as v;
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: v.$secondary-color;
+  color: v.$text-color;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+
+  &:hover {
+    background-color: v.$primary-hover-color;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    background-color: v.$primary-active-color;
+    transform: scale(0.95);
+  }
+}
+
+/* ===== Variant styles ===== */
+.primary {
+  background-color: v.$primary-color;
+  color: #fff;
+}
+
+.secondary {
+  background-color: v.$secondary-color;
+  color: #fff;
+}
+
+.alert {
+  background-color: #ff4d4f;
+  color: #fff;
+
+  &:hover {
+    background-color: #d9363e;
+  }
+
+  &:active {
+    background-color: #b9252d;
+  }
+}
+
+.success {
+  background-color: #52c41a;
+  color: #fff;
+
+  &:hover {
+    background-color: #3f9e0d;
+  }
+
+  &:active {
+    background-color: #347f0a;
+  }
+}
+
+.ghost {
+  background-color: transparent;
+  border: 1px solid v.$primary-color;
+  color: v.$primary-color;
+
+  &:hover {
+    background-color: rgba(37, 71, 160, 0.08);
+  }
+
+  &:active {
+    background-color: rgba(37, 71, 160, 0.15);
+  }
+}
+
+.default-white {
+  background-color: v.$bg-white;
+  color: v.$primary-color;
+  padding: 10px 24px;
+  border-radius: 9999px; // 타원형
+  font-weight: 500;
+  border: 1px solid v.$primary-color;
+
+  &:hover {
+    background-color: lighten(v.$bg-white, 5%);
+  }
+
+  &:active {
+    background-color: darken(v.$bg-white, 5%);
+  }
+}
+
+/* ===== Size styles ===== */
+.small {
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.medium {
+  padding: 10px 16px;
+  font-size: 16px;
+}
+
+.large {
+  padding: 14px 20px;
+  font-size: 18px;
+}
+
+/* ===== State ===== */
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loader {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== Carousel button ===== */
+.carousel-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: v.$secondary-color;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+  &:hover {
+    background-color: v.$primary-hover-color;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    background-color: v.$primary-active-color;
+    transform: scale(0.95);
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.left {
+  /* margin-right: 8px; */
+}
+
+.right {
+  /* margin-left: 8px; */
+}

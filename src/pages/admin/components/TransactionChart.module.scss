@@ -1,0 +1,31 @@
+.chartWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.chartContainer {
+  background: #1e293b;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  color: #f1f5f9;
+  font-family: "Pretendard", sans-serif;
+  width: 100%;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #e7f5ff;
+}
+
+.statusText {
+  color: #94a3b8;
+  padding: 2rem;
+  text-align: center;
+}

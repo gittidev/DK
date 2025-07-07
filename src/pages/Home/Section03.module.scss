@@ -1,0 +1,91 @@
+@use "../../styles/variables" as v;
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 80px 60px;
+  background-color: v.$bg-color !important;
+  min-height: 100vh;
+  // 전체 최대 폭 지정
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.canvasContainer {
+  flex: 1 1 600px;
+  min-width: 320px;
+  max-width: 640px;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.description {
+  flex: 1 1 400px;
+  min-width: 280px;
+  max-width: 600px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  line-height: 1.6;
+  font-size: 1rem;
+
+  overflow-wrap: break-word;
+  word-break: keep-all;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    word-break: keep-word;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    flex-direction: column;
+    padding: 48px 24px;
+    gap: 32px;
+  }
+
+  .canvasContainer {
+    width: 100%;
+    aspect-ratio: 1.2 / 1;
+  }
+
+  .description {
+    width: 100%;
+    font-size: 1rem;
+
+    h3 {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 32px 16px;
+    gap: 24px;
+    position: relative;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    position: absolute;
+    h3 {
+      font-size: 1.15rem;
+    }
+  }
+}

@@ -1,0 +1,66 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  color: white;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.viewButton {
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 1px solid #3b82f6;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #3b82f6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #e0f2fe;
+  }
+}
+
+.active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.stats {
+  display: flex;
+  gap: 1rem;
+  border-radius: 1rem;
+  color: #f1f5f9;
+}
+
+.statItem {
+  flex: 1;
+  background: #0f172a;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: inset 0 0 0 1px #334155;
+}
+
+.statItem h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #93c5fd;
+}
+
+.statItem p {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.listSection {
+  background: #1e293b;
+  padding: 2rem;
+  border-radius: 1rem;
+  color: white;
+}
