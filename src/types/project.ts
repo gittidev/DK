@@ -18,3 +18,10 @@ export interface LocationData {
   longitude: number | null;
   description: string | null;
 }
+
+export interface Project {
+  approval_number: string;
+  name: string;
+  issued_at: string;
+  total_amount: number;
+}

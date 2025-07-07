@@ -1,14 +1,9 @@
-// components/ProjectList.tsx
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { supabase } from "../../../utils/supabaseClient";
 import styles from "./ProjectList.module.scss";
-
-interface Project {
-  approval_number: string;
-  name: string;
-  issued_at: string;
-  total_amount: number;
-}
+import type { Project } from "./../../../types/project";
+import ProjectForm from "./ProjectForm";
+import ProjectTable from "./ProjectTable";
 
 const PAGE_SIZE = 10;
 
@@ -17,7 +12,6 @@ export default function ProjectList() {
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [newProject, setNewProject] = useState<Partial<Project>>({});
   const [editProject, setEditProject] = useState<Partial<Project>>({});
   const observerRef = useRef<HTMLTableRowElement | null>(null);
 
@@ -50,25 +44,17 @@ export default function ProjectList() {
 
   useEffect(() => {
     if (!observerRef.current || !hasMore) return;
-
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         setPage((prev) => prev + 1);
       }
     });
-
     observer.observe(observerRef.current);
     return () => observer.disconnect();
   }, [projects, hasMore]);
 
-  const handleDelete = async (approval_number: string) => {
-    await supabase
-      .from("projects")
-      .delete()
-      .eq("approval_number", approval_number);
-    setProjects((prev) =>
-      prev.filter((p) => p.approval_number !== approval_number)
-    );
+  const handleAdd = (newProject: Project) => {
+    setProjects((prev) => [newProject, ...prev]);
   };
 
   const handleEdit = (project: Project) => {
@@ -90,144 +76,30 @@ export default function ProjectList() {
     setEditingId(null);
   };
 
-  const handleAdd = async () => {
-    if (!newProject.name || !newProject.issued_at || !newProject.total_amount)
-      return;
-    const approval_number = Date.now().toString();
-    const fullProject = { ...newProject, approval_number } as Project;
-    await supabase.from("projects").insert([fullProject]);
-    setProjects((prev) => [fullProject, ...prev]);
-    setNewProject({});
+  const handleDelete = async (approval_number: string) => {
+    await supabase
+      .from("projects")
+      .delete()
+      .eq("approval_number", approval_number);
+    setProjects((prev) =>
+      prev.filter((p) => p.approval_number !== approval_number)
+    );
   };
 
   return (
     <div className={styles.tableWrapper}>
-      <div className={styles.addForm}>
-        <input
-          placeholder="프로젝트명"
-          value={newProject.name || ""}
-          onChange={(e) =>
-            setNewProject({ ...newProject, name: e.target.value })
-          }
-        />
-        <input
-          type="date"
-          value={newProject.issued_at || ""}
-          onChange={(e) =>
-            setNewProject({ ...newProject, issued_at: e.target.value })
-          }
-        />
-        <input
-          type="number"
-          placeholder="총액"
-          value={newProject.total_amount || ""}
-          onChange={(e) =>
-            setNewProject({
-              ...newProject,
-              total_amount: Number(e.target.value),
-            })
-          }
-        />
-        <button className={styles.addBtn} onClick={handleAdd}>
-          추가
-        </button>
-      </div>
-
-      <table>
-        <thead>
-          <tr>
-            <th>프로젝트명</th>
-            <th>승인번호</th>
-            <th>발행일</th>
-            <th>총액</th>
-            <th>작업</th>
-          </tr>
-        </thead>
-        <tbody>
-          {projects.map((project, idx) => (
-            <tr
-              key={project.approval_number}
-              ref={idx === projects.length - 1 ? observerRef : null}
-            >
-              <td>
-                {editingId === project.approval_number ? (
-                  <input
-                    value={editProject.name || ""}
-                    onChange={(e) =>
-                      setEditProject({ ...editProject, name: e.target.value })
-                    }
-                  />
-                ) : (
-                  project.name
-                )}
-              </td>
-              <td>{project.approval_number}</td>
-              <td>
-                {editingId === project.approval_number ? (
-                  <input
-                    type="date"
-                    value={editProject.issued_at || ""}
-                    onChange={(e) =>
-                      setEditProject({
-                        ...editProject,
-                        issued_at: e.target.value,
-                      })
-                    }
-                  />
-                ) : (
-                  new Date(project.issued_at).toLocaleDateString("ko-KR")
-                )}
-              </td>
-              <td>
-                {editingId === project.approval_number ? (
-                  <input
-                    type="number"
-                    value={editProject.total_amount || 0}
-                    onChange={(e) =>
-                      setEditProject({
-                        ...editProject,
-                        total_amount: Number(e.target.value),
-                      })
-                    }
-                  />
-                ) : (
-                  `₩${project.total_amount.toLocaleString()}`
-                )}
-              </td>
-              <td>
-                {editingId === project.approval_number ? (
-                  <>
-                    <button className={styles.saveBtn} onClick={handleUpdate}>
-                      저장
-                    </button>
-                    <button
-                      className={styles.cancelBtn}
-                      onClick={() => setEditingId(null)}
-                    >
-                      취소
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      className={styles.editBtn}
-                      onClick={() => handleEdit(project)}
-                    >
-                      수정
-                    </button>
-                    <button
-                      className={styles.deleteBtn}
-                      onClick={() => handleDelete(project.approval_number)}
-                    >
-                      삭제
-                    </button>
-                  </>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ProjectForm onAdd={handleAdd} />
+      <ProjectTable
+        projects={projects}
+        observerRef={observerRef}
+        editingId={editingId}
+        editProject={editProject}
+        setEditProject={setEditProject}
+        setEditingId={setEditingId}
+        onEdit={handleEdit}
+        onUpdate={handleUpdate}
+        onDelete={handleDelete}
+      />
       {!hasMore && (
         <p className={styles.endMessage}>모든 프로젝트를 불러왔습니다.</p>
       )}

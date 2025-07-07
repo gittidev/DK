@@ -20,7 +20,7 @@ export default function AdminLogin() {
       return;
     }
 
-    navigate("/admin/dashboard");
+    navigate("/admin");
   };
 
   return (

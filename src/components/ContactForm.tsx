@@ -5,14 +5,14 @@ import { saveAs } from "file-saver";
 
 interface PCSpec {
   spec: string;
-  length: string;
+  length: number;
 }
 
 interface ContactFormValues {
   location: string;
   timeline: string;
   contact: string;
-  estimatedCost: string;
+  estimatedCost: number;
   equipment: string;
   otherRequests: string;
   pcBoxSpecs: PCSpec[];
@@ -24,10 +24,10 @@ export default function ContactForm() {
       location: "",
       timeline: "",
       contact: "",
-      estimatedCost: "",
+      estimatedCost: 0,
       equipment: "",
       otherRequests: "",
-      pcBoxSpecs: [{ spec: "", length: "" }],
+      pcBoxSpecs: [{ spec: "", length: 0 }],
     },
   });
 
@@ -168,7 +168,12 @@ export default function ContactForm() {
 
         <div className={styles.formGroup}>
           <label>시공 시기</label>
-          <input {...register("timeline", { required: true })} />
+          <input
+            type="date"
+            {...register("timeline", {
+              required: "시공 시기를 입력해주세요.",
+            })}
+          />
         </div>
 
         <div className={styles.formGroup}>
@@ -178,7 +183,15 @@ export default function ContactForm() {
 
         <div className={styles.formGroup}>
           <label>예상 시공 견적비용</label>
-          <input {...register("estimatedCost")} />
+          <input
+            type="number"
+            {...register("estimatedCost", {
+              required: "예상 견적 비용을 입력해주세요.",
+              valueAsNumber: true,
+              validate: (value) =>
+                (!isNaN(value) && value > 0) || "숫자만 입력해주세요.",
+            })}
+          />
         </div>
 
         <div className={styles.formGroup}>
@@ -201,9 +214,16 @@ export default function ContactForm() {
               </select>
 
               <input
-                placeholder="50m"
-                {...register(`pcBoxSpecs.${index}.length` as const)}
+                type="number"
+                placeholder="50"
+                {...register(`pcBoxSpecs.${index}.length` as const, {
+                  required: "길이를 입력해주세요.",
+                  valueAsNumber: true,
+                  validate: (value) =>
+                    (!isNaN(value) && value > 0) || "숫자만 입력해주세요.",
+                })}
               />
+
               <button type="button" onClick={() => remove(index)}>
                 ❌
               </button>
@@ -211,7 +231,7 @@ export default function ContactForm() {
           ))}
           <button
             type="button"
-            onClick={() => append({ spec: "", length: "" })}
+            onClick={() => append({ spec: "", length: 0 })}
             className={styles.addBtn}
           >
             + 항목 추가

@@ -3,7 +3,8 @@
 .background {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  overflow: hidden;
 
   .backgroundLayer {
     position: absolute;
@@ -18,10 +19,10 @@
     background-position: center;
     opacity: 0;
     transition: opacity 1s ease;
-  }
 
-  .backgroundImage.active {
-    opacity: 1;
+    &.active {
+      opacity: 1;
+    }
   }
 
   .overlayContent {
@@ -31,6 +32,7 @@
     width: 100%;
     height: 100%;
     z-index: 2;
+    color: white;
 
     .topContent {
       flex: 1;
@@ -39,11 +41,13 @@
       justify-content: center;
       align-items: center;
       padding: 20px;
+      text-align: center;
 
       h1 {
         font-size: 5rem;
         margin-bottom: 10px;
       }
+
       p {
         font-size: 2rem;
       }
@@ -55,6 +59,18 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      text-align: center;
+      padding: 0 1rem;
+
+      h2 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+        max-width: 600px;
+      }
 
       .control {
         position: absolute;
@@ -66,10 +82,17 @@
         gap: 16px;
         z-index: 2;
 
+        button {
+          padding: 10px 16px;
+          font-size: 1.2rem;
+          border-radius: 6px;
+          min-width: 48px;
+        }
+
         .progressbar {
-          width: 120px;
+          min-width: 100px;
           height: 6px;
-          background-color: rgb(255, 255, 255);
+          background-color: white;
           border-radius: 3px;
           overflow: hidden;
 
@@ -77,6 +100,76 @@
             height: 100%;
             background-color: v.$primary-color;
             border-radius: 3px;
+          }
+        }
+      }
+    }
+  }
+
+  // ✅ 반응형 대응
+  @media (max-width: 768px) {
+    .overlayContent {
+      .topContent {
+        h1 {
+          font-size: 3rem;
+        }
+        p {
+          font-size: 1.2rem;
+        }
+      }
+
+      .bottomContent {
+        h2 {
+          font-size: 1.6rem;
+        }
+
+        p {
+          font-size: 1rem;
+        }
+
+        .control {
+          flex-direction: row; // 유지
+          gap: 8px;
+          bottom: 30px;
+
+          button {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+          }
+
+          .progressbar {
+            min-width: 80px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .overlayContent {
+      .topContent {
+        h1 {
+          font-size: 2rem;
+        }
+        p {
+          font-size: 1rem;
+        }
+      }
+
+      .bottomContent {
+        h2 {
+          font-size: 1.3rem;
+        }
+
+        p {
+          font-size: 0.9rem;
+        }
+
+        .control {
+          bottom: 30px;
+
+          .progressbar {
+            min-width: 80px;
           }
         }
       }
