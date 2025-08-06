@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../utils/supabaseClient";
+import type { Session } from "@supabase/supabase-js";
 
 export const useAdminGuard = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -8,7 +9,7 @@ export const useAdminGuard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const checkAdminStatus = async (session) => {
+    const checkAdminStatus = async (session: Session | null) => {
       if (!session?.user) {
         setIsAdmin(false);
         setLoading(false);
