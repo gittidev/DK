@@ -30,13 +30,22 @@ export const siteCardInfos = [
 const Section02 = () => {
   return (
     <section className={styles.container}>
-      {siteCardInfos.map((info) => (
-        <div key={info.id} className={styles.card}>
-          <img src={info.icon} alt={info.title} className={styles.icon} />
-          <h4 className={styles.title}>{info.title}</h4>
-          <p className={styles.description}>{info.description}</p>
-        </div>
-      ))}
+      <h2 className={styles.title}>우리의 강점</h2>
+      <p className={styles.subtitle}>
+        대광PC는 고객 만족을 최우선으로 생각하며, 최고의 기술력과 서비스로
+        보답하겠습니다.
+      </p>
+      <div className={styles.cardContainer}>
+        {siteCardInfos.map((info) => (
+          <div key={info.id} className={styles.card}>
+            <img src={info.icon} alt={info.title} className={styles.icon} />
+            <div className={styles.cardContent}>
+              <h4 className={styles.cardTitle}>{info.title}</h4>
+              <p className={styles.cardDescription}>{info.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 };

@@ -53,47 +53,37 @@ export default function Section01() {
 
   return (
     <div className={styles.background}>
-      <div className={styles.backgroundLayer}>
-        {images.map((img, i) => (
-          <div
-            key={i}
-            className={`${styles.backgroundImage} ${
-              i === index ? styles.active : ""
-            }`}
-            style={{
-              backgroundImage: `url(${img})`,
-            }}
-          ></div>
-        ))}
-      </div>
+      {images.map((img, i) => (
+        <div
+          key={i}
+          className={`${styles.backgroundImage} ${
+            i === index ? styles.active : ""
+          }`}
+          style={{
+            backgroundImage: `url(${img})`,
+          }}
+        ></div>
+      ))}
       <div className={styles.overlayContent}>
-        <article className={styles.topContent}>
-          <h1>대광 PC</h1>
-          <p>Precast Concrete 전문 기업</p>
-        </article>
-
-        <article className={styles.bottomContent}>
-          <h2>우리가 하는 일</h2>
-          <p>
-            대광 PC는 프리캐스트 콘크리트 설치 전문 기업입니다. 고품질의
-            프리캐스트 콘크리트 제품과 서비스를 제공합니다.
-          </p>
-
-          <div className={styles.control}>
-            <Button direction="left" onClick={handlePrev}>
-              &lt;
-            </Button>
-            <Button direction="right" onClick={handleNext}>
-              &gt;
-            </Button>
-            <div className={styles.progressbar}>
-              <div
-                className={styles.progress}
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
+        <h1>대광 PC</h1>
+        <p>
+          최고의 기술력과 노하우를 바탕으로 프리캐스트 콘크리트 산업을
+          선도합니다.
+        </p>
+        <div className={styles.control}>
+          <Button direction="left" onClick={handlePrev}>
+            &lt;
+          </Button>
+          <div className={styles.progressbar}>
+            <div
+              className={styles.progress}
+              style={{ width: `${progress}%` }}
+            ></div>
           </div>
-        </article>
+          <Button direction="right" onClick={handleNext}>
+            &gt;
+          </Button>
+        </div>
       </div>
     </div>
   );

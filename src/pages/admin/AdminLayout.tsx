@@ -4,13 +4,21 @@ import { useAdminGuard } from "../../hooks/useAdminGuard";
 import styles from "./AdminLayout.module.scss";
 
 export default function AdminLayout() {
-  useAdminGuard();
+  const { isAdmin, loading } = useAdminGuard();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/admin/login");
   };
+
+  if (loading) {
+    return null;
+  }
+
+  if (!isAdmin) {
+    return null;
+  }
 
   return (
     <div className={styles.adminLayout}>

@@ -1,95 +1,57 @@
 @use "../styles/variables" as v;
+@use "../styles/mixins" as m;
 
 .footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 3rem 1rem;
-  background: v.$bg-color;
-  color: v.$text-color;
-}
-
-.contactContainer {
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2.5rem;
-  padding: 2rem 1rem;
-  border-top: 1px solid v.$border-color;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-shrink: 0;
-
-  h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: v.$primary-color;
-    white-space: nowrap;
-  }
-}
-
-.contactWrapper {
-  flex: 1;
-  min-width: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.contactTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: v.$text-color;
-}
-
-.contactContent {
+  background-color: #222222;
+  color: v.$text-white;
+  padding: 50px 40px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
-  flex-wrap: wrap;
-  font-size: 1rem;
-  color: v.$secondary-color;
+  align-items: center;
 
-  > div {
+  .footerContent {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    flex: 1;
-    min-width: 220px;
-  }
-}
-
-.license {
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: v.$secondary-color;
-  text-align: center;
-}
-
-// 반응형
-@media (max-width: 768px) {
-  .contactContainer {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    gap: 80px;
+    align-items: flex-start;
   }
 
   .logo {
-    flex-direction: column;
-    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    h3 {
+      font-size: 24px;
+      font-weight: bold;
+      color: v.$text-white;
+    }
   }
 
-  .contactContent {
+  .footerInfo {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #a0a0a0;
+
+    strong {
+      color: v.$text-white;
+      margin-right: 10px;
+    }
+  }
+
+  .license {
+    font-size: 14px;
+    color: #a0a0a0;
+  }
+
+  @include m.respond(phone) {
     flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+    gap: 30px;
+    text-align: center;
+
+    .footerContent {
+      flex-direction: column;
+      gap: 30px;
+      align-items: center;
+    }
   }
 }

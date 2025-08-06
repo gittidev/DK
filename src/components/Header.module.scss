@@ -5,10 +5,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 20px;
+  padding: 20px 40px;
   position: sticky;
   top: 0;
   z-index: 100;
+  background-color: v.$bg-white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   .a {
     padding: 10px 15px;
@@ -28,24 +30,27 @@
 
   .nav {
     display: flex;
-    gap: 20px;
+    gap: 40px;
 
     a {
       color: v.$text-color;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 18px;
+      font-weight: 500;
       transition: color 0.2s;
 
       &:hover {
-        color: v.$primary-color;
+        color: v.$point-color;
       }
     }
   }
 
   @include m.respond(phone) {
+    padding: 20px;
     flex-direction: column;
     .nav {
       margin-top: 10px;
+      gap: 20px;
     }
   }
 }

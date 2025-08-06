@@ -1,121 +1,71 @@
 @use "../../styles/variables" as v;
 
 .container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  overflow: hidden;
-  gap: 32px;
-  padding: 60px 40px;
-  max-width: 1440px;
-  margin: 0 auto;
-  box-sizing: border-box;
-  align-items: center;
-}
-
-.card {
-  background-color: white;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  height: 80%;
-  transition: transform 0.2s ease;
+  align-items: center;
+  padding: 80px 40px;
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  .title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
   }
-}
 
-.icon {
-  width: 100%;
-  aspect-ratio: 7 / 9;
-  object-fit: cover;
-  display: block;
-  flex-shrink: 0;
-  border-bottom: 1px solid #eee;
-}
+  .subtitle {
+    font-size: 1.2rem;
+    color: #666666;
+    margin-bottom: 60px;
+    text-align: center;
+  }
 
-.title {
-  font-size: clamp(1.125rem, 1.5vw, 1.25rem);
-  font-weight: bold;
-  margin: 16px 16px 8px;
-  color: v.$primary-color;
-  word-break: keep-all;
-  white-space: normal;
-}
-
-.description {
-  font-size: clamp(0.95rem, 1.2vw, 1rem);
-  margin: 0 16px 16px;
-  color: v.$primary-color;
-  line-height: 1.5;
-  word-break: keep-all;
-  white-space: normal;
-}
-
-@media (max-width: 1024px) {
-  .container {
-    gap: 24px;
-    padding: 48px 24px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  .cardContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
   }
 
   .card {
-    position: relative;
+    background-color: v.$bg-white;
+    border: 1px solid v.$border-color;
+    border-radius: 8px;
+    overflow: hidden; // 이미지가 border-radius를 넘지 않도록
+    text-align: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon {
+      width: 100%;
+      height: 200px; // 이미지 높이 지정
+      object-fit: cover; // 이미지가 비율을 유지하며 채우도록
+    }
+
+    .cardContent {
+      padding: 30px;
+    }
+
+    .cardTitle {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .cardDescription {
+      font-size: 1rem;
+      color: #666666;
+      line-height: 1.6;
+    }
   }
 
-  .icon {
-    min-height: 200px;
-  }
-
-  .title {
-    position: absolute;
-    bottom: 40px;
-    left: 16px;
-    color: white;
-    font-size: 1.1rem;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-    z-index: 2;
-  }
-
-  .description {
-    position: absolute;
-    bottom: 16px;
-    left: 16px;
-    color: white;
-    font-size: 0.9rem;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-    z-index: 2;
-  }
-}
-
-@media (max-width: 768px) {
-  .icon {
-    min-height: 200px;
-  }
-
-  .title {
-    font-size: 1.1rem;
-  }
-
-  .description {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    gap: 8px;
-    padding: 24px 12px;
-  }
-
-  .title {
-    font-size: 0.95rem;
-  }
-
-  .description {
-    font-size: 0.875rem;
+  @media (max-width: 768px) {
+    .cardContainer {
+      grid-template-columns: 1fr;
+    }
   }
 }

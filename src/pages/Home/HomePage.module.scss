@@ -3,39 +3,17 @@
 main {
   section {
     display: flex;
-    position: sticky;
-    top: 0;
     flex-direction: column;
     width: 100%;
+    min-height: 100vh;
+    padding: 80px 40px;
 
-    transition: background-color 0.3s ease;
-
-    &:nth-child(1) {
-      height: calc(100vh - 85px);
-      background-color: v.$primary-color;
-      z-index: 1;
-    }
-    &:nth-child(2) {
-      height: 100vh;
-      background-color: v.$primary-color;
-      z-index: 2;
-    }
-
-    &:nth-child(3) {
-      height: 100vh;
-      background-color: v.$bg-color;
-      z-index: 3;
-    }
-
-    &:nth-child(4) {
-      height: 100vh;
+    &:nth-child(odd) {
       background-color: v.$bg-white;
-      z-index: 4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+    }
+
+    &:nth-child(even) {
+      background-color: v.$bg-color;
     }
   }
 }
